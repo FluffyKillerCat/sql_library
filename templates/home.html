@@ -4,13 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book List</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .search {
+        margin-bottom: 20px;
+      }
+      .search input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .book {
+        padding: 15px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #ddd;
+      }
+      .book h3 {
+        margin: 0;
+        color: #007bff;
+      }
+      .book h4, .book h5 {
+        margin: 5px 0;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+
   </head>
   <body>
+    <div class="container">
+      <h1>Book List</h1>
+      <div class="search">
+  <form action="/" method="POST">
+    <input
+      type="text"
+      name="searchInput"
+      id="searchInput"
+      placeholder="Search by title or author..."
+    />
+    <button type="submit">Search</button>
+  </form>
+</div>
 
-    {% for book in books %}
-    <div> <h3>{{ book.title }}</h3>
+      {% if books %}
+  {% for book in books %}
+    <div class="book">
+      <h3>Title: {{ book.title }}</h3>
+      <h4>Author: {{ book.name }}</h4>
+      <h4>ISBN: {{ book.isbn }}</h4>
+      <h5>Publication Year: {{ book.publication_year }}</h5>
+      <form action="/delete-book/{{ book.id }}" method="POST">
+        <button type="submit">Delete Book</button>
+      </form>
     </div>
-    {% endfor %}
+  {% endfor %}
+{% else %}
+  <div class="no-results">
+    <h3>No results found.</h3>
+  </div>
+{% endif %}
 
+
+
+    </div>
   </body>
 </html>

@@ -24,6 +24,7 @@ class Book(db.Model):  # Added .Model to make it valid
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     isbn = db.Column(db.Integer)
     title = db.Column(db.Text)
+    publication_year = db.Column(db.Integer)
     author_id = db.Column(db.Integer, db.ForeignKey('authors.id'))
 
     def __repr__(self):
